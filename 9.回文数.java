@@ -10,20 +10,19 @@ class Solution {
     if (x < 0) {
       return false;
     }
+
     int rev = 0;
     int ori = x;
-    while (x != 0) {
-      if (rev < Integer.MIN_VALUE / 10 || rev > Integer.MAX_VALUE / 10) {
+    while(x > 0) {
+      // 如果翻转后会溢出，则肯定不是回文数，此处逻辑参考题号 7
+      if (rev < Integer.MIN_VALUE/10 || rev > Integer.MAX_VALUE/10) {
         return false;
       }
-      int d = x % 10;
+      int temp = x % 10;
+      rev = rev * 10 + temp;
       x = x / 10;
-      rev = rev * 10 + d;
     }
-    if (rev == ori) {
-      return true;
-    }
-    return false;
+    return rev == ori;
   }
 }
 // @lc code=end
