@@ -32,21 +32,17 @@ class Solution {
         queue.offer("0000");
         visited.add("0000");
 
-        // 有个测试用例把0000放到deadends里了
-        if (dead.contains("0000")) {
-            return -1;
-        }
-
         while(!queue.isEmpty()) {
             // 一层一层遍历
             int n = queue.size();
             for (int i = 0; i < n; i++) {
                 String s = queue.poll();
                 // 如果是deadends里的则跳过，继续下一个
-                // 这个判断可以不要，因为下面往queue里添加的时候已经判断过了
-                // if (dead.contains(s)) {
-                //     continue;
-                // }
+                // 这个判断必须要，因为有个测试用例把0000放到deadends里了，有可能一开始就不符合要求
+                // 同时因为这里检查deadends了，那么下面 up 和 down 那里只需要检查visited就可以
+                if (dead.contains(s)) {
+                    continue;
+                }
                 if (target.equals(s)) {
                     return res;
                 }
@@ -54,12 +50,13 @@ class Solution {
                 // 依次把四位数字拨上拨下
                 for (int j = 0; j < 4; j++) {
                     String up = up(s, j);
-                    if (!dead.contains(up) && !visited.contains(up)) {
+                    // 因为下一轮遍历的时候会检查deadends，所以这里可以不检查
+                    if (!visited.contains(up)) {
                         queue.offer(up);
                         visited.add(up);
                     }
                     String down = down(s, j);
-                    if (!dead.contains(down) && !visited.contains(down)) {
+                    if (!visited.contains(down)) {
                         queue.offer(down);
                         visited.add(down);
                     }
