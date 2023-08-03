@@ -12,6 +12,7 @@ class Solution {
     // 记录当前选择的排列
     List<Integer> cur = new LinkedList<Integer>();
     // 记录已经选择过的值
+    // 这里也可以用一个boolean[]来表示第i个数字有没有选择过
     Set<Integer> set = new HashSet<Integer>();
 
     public List<List<Integer>> permute(int[] nums) {
