@@ -18,6 +18,9 @@
  */
 class Solution {
 
+    // 这题属于数学题，如何在长度未知的序列（数据流）中随机选择一个元素出来？
+    // 结论：当你遇到第 i 个元素时，应该有 1/i 的概率选择该元素，1 - 1/i 的概率保持原有的选择。
+
     // 此题描述不太好，它想考察蓄水池解法
     // 此题主要是在于只取一次随机数的话，最佳方案是什么？
     // 尽量只遍历一次，空间占用也要最小
@@ -32,6 +35,8 @@ class Solution {
     // 以此类推，取第n个数字就进行1到n的随机数，这样使得每个数字的取值概率都是均等的1/n
 
     private ListNode head;
+    Random r = new Random();
+
     public Solution(ListNode head) {
         this.head = head;
     }
@@ -43,10 +48,10 @@ class Solution {
         ListNode cur = head;
         while(cur!=null) {
             n++;
-            Random r = new Random();
             // nextInt(x) 是含0不含n的整数，+1后变为含1含n不含n+1的整数
             int i = r.nextInt(n) + 1;
             // 如果随即出来的数字等于当前的n，概率为1/n，那么就更新结果
+            // 也可以直接 if (0 == r.nextInt(n)) 随机一个[0,n)的数，该数等于0的概率为1/n
             if (i == n) {
                 res = cur.val;
             }
