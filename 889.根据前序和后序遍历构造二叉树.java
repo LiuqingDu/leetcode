@@ -37,12 +37,9 @@ class Solution {
             return null;
         }
 
-
-        // 后面会取到索引为preStart+1，但有一种极端可能是所有节点都满足在左节点
-        // 导致preStart一直向右逼近preEnd，但preEnd又不往左移动，最终preStart和preEnd在最右边相遇
-        // 那么这时候preStart+1就超出索引了，所以这里提前返回一个单独节点
+        // 当preStart == preEnd时，说明再也没有子树了，因为[preStart, preEnd]之间的节点就是一棵树
+        // 提前返回叶子节点，否则后面的逻辑会把其他节点当作子节点
         if (preStart == preEnd) {
-            // System.out.println(""+preStart+preEnd+postStart+postEnd);
             return new TreeNode(preorder[preStart]);
         }
 
