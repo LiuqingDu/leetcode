@@ -16,7 +16,7 @@ class Solution {
     // 记录板子坐标为 [0, 1, 2]
     //               [3, 4, 5]
     // 格子0的邻居是1和3，依此类推
-    // 至于板子上棋子的状态，可以使用字符串来表示，方便操作
+    // 至于板子上棋子的状态，可以使用字符串来表示，方便操作，这样才能使用Set存储
     public int slidingPuzzle(int[][] board) {
         int m = 2, n = 3;
         StringBuilder sb = new StringBuilder();
