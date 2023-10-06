@@ -32,16 +32,70 @@ class Solution {
         int m = dungeon.length;
         int n = dungeon[0].length;
 
-        memo = new int[m][n];
-        for (int[] row: memo) {
-            // 填入一个特殊值，表示还没有计算过
-            Arrays.fill(row, -1);
+        // 动态规划方法一，从右下角往左上角计算，不需要备忘录
+
+        int[][] dp = new int[m][n];
+        
+        // base case，右下角终点
+        if (dungeon[m - 1][n - 1] >= 0) {
+            dp[m - 1][n - 1] = 1;
+        } else {
+            dp[m - 1][n - 1] = -dungeon[m - 1][n - 1] + 1;
         }
 
-        return dp(dungeon, 0, 0);
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >=0; j--) {
+                // 跳过终点，已经计算过了
+                if (i == m - 1 && j == n - 1) {
+                    continue;
+                }
+
+                // 找到每个点的下边和右边的最小生命值
+                int bottom;
+                int right;
+
+                // 处理一下边界的情况
+                if (i == m - 1) {
+                    bottom = Integer.MAX_VALUE;
+                } else {
+                    bottom = dp[i + 1][j];
+                }
+                if (j == n - 1) {
+                    right = Integer.MAX_VALUE;
+                } else {
+                    right = dp[i][j + 1];
+                }
+
+                // 取下边和右边的最小值
+                int min = Math.min(bottom, right);
+                // 进入当前格子之前的生命值+当前格子的值=刚才算出来的最小值
+                // 当前所需最小值=算出来的下一步最小值-当前格子值
+                int cur = min - dungeon[i][j];
+
+                // 生命值最小为1
+                if (cur <= 0) {
+                    cur = 1;
+                }
+
+                // 记录下来
+                dp[i][j] = cur;
+            }
+        }
+
+        return dp[0][0];
+
+        // 动态规划方法二，从左上角往右下角算，需要备忘录
+        // memo = new int[m][n];
+        // for (int[] row: memo) {
+        //     // 填入一个特殊值，表示还没有计算过
+        //     Arrays.fill(row, -1);
+        // }
+
+        // return dp(dungeon, 0, 0);
 
     }
 
+    // 方法二的
     // 从(i, j)到右下角终点，最少需要多少生命值
     private int dp(int[][] grid, int i, int j) {
         int m = grid.length;
