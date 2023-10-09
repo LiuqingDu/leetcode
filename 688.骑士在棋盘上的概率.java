@@ -15,11 +15,11 @@ class Solution {
     public double knightProbability(int n, int k, int row, int column) {
         // 记录在坐标(row, column)的位置走k步，在棋盘内的概率，因为k可以是0，所以初始化容量+1，为[0, k]区间
         memo = new double[n][n][k + 1];
-        return dp(n, k, row, column);
+        return dfs(n, k, row, column);
     }
 
     // 表示在边长为n的棋盘中，坐标为row和column，走k步后还在棋盘内的概率
-    private double dp(int n, int k, int row, int column) {
+    private double dfs(int n, int k, int row, int column) {
         // 如果现在已经超出棋盘范围了，直接停止，不再继续走，并且返回概率0
         if (row < 0 || row >= n || column < 0 || column >= n) {
             return 0;
@@ -49,6 +49,46 @@ class Solution {
 
         return posibility;
     }
+
+
+    // 动态规划
+    // 这个方法比dfs要慢一些，因为dfs没有把所有格子的概率都算出来，只算了需要的那部分
+    // 动态规划则是把所有格子所有可能性都算了一遍
+    // 定义dp[i][j][k]表示走了k步后，落到(i, j)格子的概率
+    // 可以看出来它取决于上一步的概率，当前格子周围的8个格子均有概率落在当前格子上，
+    // 那么也就取决于k-1步落到这8个格子的概率之和
+    // public double knightProbability(int n, int k, int row, int column) {
+    //     double[][][] dp = new double[n][n][k + 1];
+
+    //     // 因为k取决于k-1，k-1取决于k-2，所以需要从k=0算起
+    //     for (int kk = 0; kk <= k; kk++) {
+    //         for (int i = 0; i < n; i++) {
+    //             for (int j = 0; j < n; j++) {
+    //                 // 如果步数为0，那么概率就是1
+    //                 if (kk == 0) {
+    //                     dp[i][j][kk] = 1l;
+    //                 } else {
+    //                     double posibility = 0l;
+    //                     for (int[] move: moves) {
+    //                         int preI = i - move[0];
+    //                         int preJ = j - move[1];
+    //                         // 上一步在棋盘里的时候才加起来，否则当0看待
+    //                         // 这里一定要判断，因为棋盘外的概率是0，但又不存在dp当中
+    //                         // dp只保存了棋盘内的概率
+    //                         if (preI >= 0 && preI < n && preJ >=0 && preJ < n) {
+    //                             // 把上一步的概率加起来
+    //                             posibility += dp[preI][preJ][kk - 1];
+    //                         }
+    //                     }
+    //                     posibility /= 8.0;
+    //                     dp[i][j][kk] = posibility;
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     return dp[row][column][k];
+    // }
 }
 // @lc code=end
 
