@@ -13,10 +13,12 @@ var countPrimes = function(n) {
 
     let arr = [];
 
+    // assume all numbers are prime numbers
     for (let i = 0; i < n; i++) {
         arr[i] = true;
     }
 
+    // mark all composite numbers as false
     for (let i = 2; i*i < n; i++) {
         for (let j = i; i * j < n; j++) {
             arr[i*j] = false;
