@@ -19,6 +19,11 @@ var canFinish = function(numCourses, prerequisites) {
         indegree[i] = 0;
     }
 
+    // `let graph = new Array(num).fill([])` will have elements refer to the same []
+    // if need to have different [] for each element, use: 
+    // let graph = Array.from(Array(num), ()=>[]);
+    // it will use a new Array(num), then return a new [] to set up each element.
+
     for (let req of prerequisites) {
         let [to, from] = req;
         graph[from].push(to);
