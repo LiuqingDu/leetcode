@@ -33,10 +33,6 @@ class Solution {
         dummp.next = head;
         ListNode fast = dummp;
 
-        if (k == 0) {
-            return head;
-        }
-
         while (k > 0) {
             fast = fast.next;
             k--;
@@ -48,9 +44,9 @@ class Solution {
             fast = fast.next;
         }
 
+        fast.next = head;
         head = slow.next;
         slow.next = null;
-        fast.next = dummp.next;
 
         return head;
     }
