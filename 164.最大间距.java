@@ -39,11 +39,11 @@ class Solution {
         Arrays.fill(mins, Integer.MAX_VALUE);
         Arrays.fill(maxs, Integer.MIN_VALUE);
 
-        for (int i = 0; i < n; i++) {
-            int position = (nums[i] - min) / bucketSize;
+        for (int num: nums) {
+            int position = (num - min) / bucketSize;
 
-            mins[position] = Math.min(mins[position], nums[i]);
-            maxs[position] = Math.max(maxs[position], nums[i]);
+            mins[position] = Math.min(mins[position], num);
+            maxs[position] = Math.max(maxs[position], num);
         }
 
         int res = 0;
