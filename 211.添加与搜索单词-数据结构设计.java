@@ -40,9 +40,6 @@ class WordDictionary {
         if (ind == chars.length) {
             return node.end;
         }
-        if (node == null) {
-            return false;
-        }
         if (chars[ind] != '.') {
             return node.children[chars[ind] - 'a'] != null && dfs(node.children[chars[ind] - 'a'], chars, ind + 1);
         } else {
