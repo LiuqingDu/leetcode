@@ -17,6 +17,7 @@ class NumArray {
 
         int n = nums.length;
         this.a = new int[n];
+        // 树状数组从1开始
         this.b = new int[n + 1];
 
         for (int i = 0; i < n; i++) {
