@@ -9,6 +9,8 @@
 class Solution {
     public boolean isValidSerialization(String preorder) {
 
+        // https://leetcode.cn/problems/verify-preorder-serialization-of-a-binary-tree/solutions/651132/pai-an-jiao-jue-de-liang-chong-jie-fa-zh-66nt/
+
         String[] cs = preorder.split(",");
 
         Stack<String> stack = new Stack();
