@@ -22,6 +22,9 @@ class Solution {
             } else if (num / mid < mid) {
                 r = mid - 1;
             } else {
+                // 这里需要判断一下是不是整除
+                // 因为这里num/mid是向下取整的，比如num=5，mid=2
+                // num/mid是2，也可以到这里来，所以需要判断一下
                 return num % mid == 0;
             }
         }
