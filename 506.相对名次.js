@@ -19,7 +19,7 @@ var findRelativeRanks = function(score) {
         map.set(copy[i], copy.length - 1 - i)
     }
     for (let c of score) {
-        res.push(map.get(c) < 3 ? ss[map.get(c)] : map.get(c) + 1 + "");
+        res.push(m0ap.get(c) < 3 ? ss[map.get(c)] : map.get(c) + 1 + "");
     }
     return res;
 
