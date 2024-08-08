@@ -7,6 +7,9 @@
 // @lc code=start
 class Solution {
     public boolean isToeplitzMatrix(int[][] matrix) {
+        // 错位比较
+        // 每一行向右移动一位然后跟下一行比较，如果相同的话就符合要求
+        // 错位比较的时候忽略第一行最后一个和第二行第一个
         for (int i = 0; i < matrix.length - 1; i++) {
             if (!compareTwoRow(matrix[i], matrix[i + 1])) {
                 return false;
