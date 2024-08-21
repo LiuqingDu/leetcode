@@ -16,18 +16,22 @@ class Solution {
         // 另外，如果有一个到头了另一个还没到头，说明也不匹配
         int i = s.length() - 1;
         int j = t.length() - 1;
+        // 记录有多少个删除符号没用过，也就是还要跳过多少个字符
         int skipS = 0;
         int skipT = 0;
 
         while (i >= 0 || j >= 0) {
             while (i >= 0) {
+                // 记录删除个数
                 if (s.charAt(i) == '#') {
                     skipS++;
                     i--;
                 } else if (skipS > 0) {
+                    // 消耗一个删除操作，跳过一个字符
                     skipS--;
                     i--;
                 } else {
+                    // 此时 i 指向一个最终字符
                     break;
                 }
             }
@@ -49,12 +53,14 @@ class Solution {
                     return false;
                 }
             } else if (i >= 0 || j >= 0) {
+                // 这里是有且仅有一个到左边界了，说明两个不一样
                 return false;
             }
 
             i--;
             j--;
         }
+        // 这里是两个指针都指向了最左侧，比完了
         return true;
     }
 }
