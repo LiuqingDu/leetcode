@@ -18,8 +18,8 @@ var numRookCaptures = function(board) {
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 8; j++) {
             if (board[i][j] === "R") {
-                x = i;
-                y = j;
+                a = i;
+                b = j;
             }
         }
     }
@@ -31,11 +31,14 @@ var numRookCaptures = function(board) {
             x += dx[i];
             y += dy[i];
 
-            if (i < 0 || x >= 8 && y < 0 || y >= 8) {
+            if (x < 0 || x >= 8 || y < 0 || y >= 8) {
                 break;
             }
             if (board[x][y] === "p") {
                 res++;
+                break;
+            }
+            if (board[x][y] === "B") {
                 break;
             }
         }
