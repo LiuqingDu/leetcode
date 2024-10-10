@@ -6,8 +6,6 @@
 
 // @lc code=start
 
-import java.util.PriorityQueue;
-
 class Solution {
     public int nthSuperUglyNumber(int n, int[] primes) {
         // 在 lc264 基础上升级的题
