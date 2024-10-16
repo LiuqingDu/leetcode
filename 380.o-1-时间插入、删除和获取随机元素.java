@@ -47,7 +47,9 @@ class RandomizedSet {
         // 如果删除的元素的下标不等于最后一个下标，
         // 那么准备用最后一个元素替换
         // 最后一个元素的下标替换为被删除的那个元素下标
-        if (loc != ind) map.put(nums[ind], loc);
+        if (loc != ind) {
+            map.put(nums[ind], loc);
+        }
         nums[loc] = nums[ind];
         // 末尾指针向左移动，表示删除了一个
         ind--;
