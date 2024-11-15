@@ -20,7 +20,7 @@ class Solution {
 
         // 为了避免分类讨论，通常多设置一行。这里可以认为，第 0 个字符串是空串。第 0 行默认初始化为 0。
         // 输出：输出是最后一个状态，即：dp[len][m][n]。
-        
+
         int len = strs.length;
         int[][][] dp = new int[len + 1][m + 1][n + 1];
 
@@ -33,6 +33,8 @@ class Solution {
                     dp[i][j][k] = dp[i - 1][j][k];
                     int zeros = count[0];
                     int ones = count[1];
+                    // 这里意思是，如果当前允许的题目里的 m 和 n 可以容得下当前字符串，那么才考虑把当前字符串放进去
+                    // 比如如果限定最多 2 个 0 以及 1 个 1，那么 0011 就不能放进去
                     if (j >= zeros && k >= ones) {
                         dp[i][j][k] = Math.max(dp[i - 1][j][k], dp[i - 1][j - zeros][k - ones] + 1);
                     }
