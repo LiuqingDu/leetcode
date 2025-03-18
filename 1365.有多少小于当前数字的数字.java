@@ -15,11 +15,15 @@ class Solution {
         for (int i = 0; i < n; i++) {
             cnt[nums[i]]++;
         }
+
+        // 累加每个数字前有多少个小数字
+        // 这里累加后是小于等于当前数字的数量
         for (int i = 1; i <= 100; i++) {
             cnt[i] += cnt[i - 1];
         }
         int[] ret = new int[n];
         for (int i = 0; i < n; i++) {
+            // cnt前一个是小于自己的数量
             ret[i] = nums[i] == 0 ? 0 : cnt[nums[i] - 1];
         }
         return ret;
