@@ -10,6 +10,10 @@
  * @return {boolean}
  */
 var reorderedPowerOf2 = function(n) {
+
+    const isPowerOfTwo = (n) => {
+        return (n & (n - 1)) === 0;
+    }
     
     const backtrack = (nums, idx, num) => {
         if (idx === nums.length) {
