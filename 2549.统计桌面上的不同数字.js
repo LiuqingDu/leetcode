@@ -1,0 +1,32 @@
+/*
+ * @lc app=leetcode.cn id=2549 lang=javascript
+ *
+ * [2549] 统计桌面上的不同数字
+ */
+
+// @lc code=start
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var distinctIntegers = function(n) {
+    let nums = new Array(n + 1).fill(0);
+    nums[n] = 1;
+    for (let k = 0; k < n; k++) {
+        for (let x = 1; x <= n; x++) {
+            if (nums[x] == 0) {
+                continue;
+            }
+            for (let i = 1; i <= n; i++) {
+                if (x % i == 1) {
+                    nums[i] = 1;
+                }
+            }
+        }
+    }
+    return nums.reduce(function(t, x) {
+        return t + x;
+    });
+};
+// @lc code=end
+
