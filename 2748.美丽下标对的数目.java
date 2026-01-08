@@ -1,0 +1,29 @@
+/*
+ * @lc app=leetcode.cn id=2748 lang=java
+ *
+ * [2748] 美丽下标对的数目
+ */
+
+// @lc code=start
+class Solution {
+    public int countBeautifulPairs(int[] nums) {
+        int res = 0, n = nums.length;
+        for (int i = 0; i < n; i++) {
+            while (nums[i] >= 10) {
+                nums[i] /= 10;
+            }
+            for (int j = i + 1; j < n; j++) {
+                if (gcd(nums[i], nums[j] % 10) == 1) {
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+
+    private int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+}
+// @lc code=end
+
