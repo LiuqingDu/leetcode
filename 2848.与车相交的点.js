@@ -1,0 +1,34 @@
+/*
+ * @lc app=leetcode.cn id=2848 lang=javascript
+ *
+ * [2848] 与车相交的点
+ */
+
+// @lc code=start
+/**
+ * @param {number[][]} nums
+ * @return {number}
+ */
+var numberOfPoints = function(nums) {
+    let C = 0;
+    for (const interval of nums) {
+        C = Math.max(C, interval[1]);
+    }
+
+    const count = new Array(C + 1).fill(0);
+    for (const interval of nums) {
+        for (let i = interval[0]; i <= interval[1]; i++) {
+            count[i]++;
+        }
+    }
+
+    let ans = 0;
+    for (let i = 1; i <= C; i++) {
+        if (count[i] > 0) {
+            ans++;
+        }
+    }
+    return ans;
+};
+// @lc code=end
+
