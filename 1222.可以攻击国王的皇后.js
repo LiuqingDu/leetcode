@@ -1,0 +1,42 @@
+/*
+ * @lc app=leetcode.cn id=1222 lang=javascript
+ *
+ * [1222] 可以攻击国王的皇后
+ */
+
+// @lc code=start
+/**
+ * @param {number[][]} queens
+ * @param {number[]} king
+ * @return {number[][]}
+ */
+var queensAttacktheKing = function(queens, king) {
+    
+    queen_pos = new Set();
+    for (const queen of queens) {
+        let x = queen[0], y = queen[1];
+        queen_pos.add(x * 8 + y);
+    }
+
+    const ans = [];
+    for (let dx = -1; dx <= 1; ++dx) {
+        for (let dy = -1; dy <= 1; ++dy) {
+            if (dx == 0 && dy == 0) {
+                continue;
+            }
+            let kx = king[0] + dx, ky = king[1] + dy;
+            while (kx >= 0 && kx < 8 && ky >= 0 && ky < 8) {
+                let pos = kx * 8 + ky;
+                if (queen_pos.has(pos)) {
+                    ans.push([kx, ky]);
+                    break;
+                }
+                kx += dx;
+                ky += dy;
+            }
+        }
+    }
+    return ans;
+};
+// @lc code=end
+
