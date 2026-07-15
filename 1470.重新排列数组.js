@@ -14,7 +14,7 @@ var shuffle = function(nums, n) {
     let res = new Array(n * 2).fill(0);
     for (let i = 0; i < n; i++) {
         res[i * 2] = nums[i]
-        res[i + 2 + 1] = nums[i + n];
+        res[i * 2 + 1] = nums[i + n];
     }
     return res;
 };
