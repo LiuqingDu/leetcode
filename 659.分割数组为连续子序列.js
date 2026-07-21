@@ -10,25 +10,33 @@
  * @return {boolean}
  */
 var isPossible = function(nums) {
-    
-    const map = new Map();
-    for (let x of nums) {
-        if (!map.has(x)) {
-            map.set(x, new MinPriorityQueue());
-        }
-        if (map.has(x - 1)) {
-            const prevLength = map.get(x - 1).dequeue()['priority'];
-            if (map.get(x - 1).isEmpty()) {
-                map.delete(x - 1);
-            }
-            map.get(x).enqueue(x, prevLength + 1);
-        } else {
-            map.get(x).enqueue(x, 1);
-        }
+
+    const countMap = new Map();
+    const endMap = new Map();
+    for (const x of nums) {
+        const count = (countMap.get(x) || 0) + 1;
+        countMap.set(x, count);
     }
-    for (let [key, value] of map.entries()) {
-        if (value.front()['priority'] < 3) {
-            return false;
+    for (const x of nums) {
+        const count = countMap.get(x) || 0;
+        if (count > 0) {
+            const prevEndCount = endMap.get(x - 1) || 0;
+            if (prevEndCount > 0) {
+                countMap.set(x, count - 1);
+                endMap.set(x - 1, prevEndCount - 1);
+                endMap.set(x, (endMap.get(x, 0) || 0) + 1);
+            } else {
+                const count1 = countMap.get(x + 1, 0);
+                const count2 = countMap.get(x + 2, 0);
+                if (count1 > 0 && count2 > 0) {
+                    countMap.set(x, count - 1);
+                    countMap.set(x + 1, count1 - 1);
+                    countMap.set(x + 2, count2 - 1);
+                    endMap.set(x + 2, (endMap.get(x + 2) || 0) + 1);
+                } else {
+                    return false;
+                }
+            }
         }
     }
     return true;
