@@ -1,0 +1,41 @@
+/*
+ * @lc app=leetcode.cn id=1104 lang=javascript
+ *
+ * [1104] 二叉树寻路
+ */
+
+// @lc code=start
+/**
+ * @param {number} label
+ * @return {number[]}
+ */
+var pathInZigZagTree = function(label) {
+    
+    let row = 1, rowStart = 1;
+    while (rowStart * 2 <= label) {
+        row++;
+        rowStart *= 2;
+    }
+    if (row % 2 === 0) {
+        label = getReverse(label, row);
+    }
+    const path = [];
+    while (row > 0) {
+        if (row % 2 === 0) {
+            path.push(getReverse(label, row));
+        } else {
+            path.push(label);
+        }
+        row--;
+        label >>= 1;
+    }
+    path.reverse();
+    return path;
+};
+
+const getReverse = (label, row) => {
+    return (1 << row - 1) + (1 << row) - 1 - label;
+}
+
+// @lc code=end
+
