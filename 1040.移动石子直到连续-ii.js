@@ -1,0 +1,36 @@
+/*
+ * @lc app=leetcode.cn id=1040 lang=javascript
+ *
+ * [1040] 移动石子直到连续 II
+ */
+
+// @lc code=start
+/**
+ * @param {number[]} stones
+ * @return {number[]}
+ */
+var numMovesStonesII = function(stones) {
+    
+    let n = stones.length;
+    stones.sort((a, b) => a - b);
+    if (stones[n - 1] - stones[0] + 1 == n) {
+        return [0, 0];
+    }
+    let ma = Math.max(stones[n - 2] - stones[0] + 1, stones[n-1] - stones[1] + 1) - (n - 1);
+    let mi = n;
+    let j = 0;
+    for (let i = 0; i < n; i++) {
+        while (j + 1 < n && stones[j + 1] - stones[i] + 1 <= n) {
+            j++;
+        }
+        if (j - i + 1 == n - 1 && stones[j] - stones[i] + 1 == n - 1) {
+            mi = Math.min(mi, 2);
+        } else {
+            mi = Math.min(mi, n - (j - i + 1));
+        }
+    }
+    return [mi, ma];
+
+};
+// @lc code=end
+
