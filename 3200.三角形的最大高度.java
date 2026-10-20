@@ -1,0 +1,34 @@
+/*
+ * @lc app=leetcode.cn id=3200 lang=java
+ *
+ * [3200] 三角形的最大高度
+ */
+
+// @lc code=start
+class Solution {
+    public int maxHeightOfTriangle(int red, int blue) {
+        
+        return Math.max(maxHeight(red, blue), maxHeight(blue, red));
+    }
+
+    public int maxHeight(int x, int y) {
+        int i = 1;
+        do {
+            if (i % 2 == 1) {
+                x -= i;
+                if (x < 0) {
+                    return i - 1;
+                }
+            } else {
+                y -= i;
+                if (y < 0) {
+                    return i - 1;
+                }
+            }
+            i++;
+        } while (true);
+    }
+
+}
+// @lc code=end
+
