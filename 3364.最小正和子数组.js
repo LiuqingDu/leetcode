@@ -15,7 +15,7 @@ var minimumSumSubarray = function(nums, l, r) {
     
     let a = nums.map((a) => a);
     let res = Number.MAX_SAFE_INTEGER;
-    for (let i = 0; i < a.length - l; i++) {
+    for (let i = 0; i <= a.length - l; i++) {
         let s = 0;
         for (let j = i; j < a.length && j - i + 1 <= r; j++) {
             s += a[j];
